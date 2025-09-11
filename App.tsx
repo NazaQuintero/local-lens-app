@@ -13,7 +13,7 @@ function App() {
           <Text style={styles.sectionTitle}>Primary Button</Text>
           <Button 
             title="Primary Button" 
-            onPress={() => console.log('Primary pressed')} 
+            onPress={() => {}} 
           />
         </View>
 
@@ -22,7 +22,7 @@ function App() {
           <Button 
             title="Secondary Button" 
             variant="secondary"
-            onPress={() => console.log('Secondary pressed')} 
+            onPress={() => {}} 
           />
         </View>
 
@@ -31,7 +31,7 @@ function App() {
           <Button 
             title="Disabled Button" 
             disabled={true}
-            onPress={() => console.log('This should not be called')} 
+            onPress={() => {}} 
           />
         </View>
 
@@ -39,7 +39,7 @@ function App() {
           <Text style={styles.sectionTitle}>Long Text Button</Text>
           <Button 
             title="This is a very long button text" 
-            onPress={() => console.log('Long text pressed')} 
+            onPress={() => {}} 
           />
         </View>
       </View>
