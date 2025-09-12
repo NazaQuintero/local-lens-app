@@ -6,25 +6,27 @@ interface ButtonProps {
   onPress: () => void;
   variant?: 'primary' | 'secondary';
   disabled?: boolean;
+  testID?: string;
 }
 
 export const Button: React.FC<ButtonProps> = ({ 
   title, 
   onPress, 
   variant = 'primary', 
-  disabled = false 
+  disabled = false,
+  testID
 }) => {
-  const buttonStyle: ViewStyle = [
-    styles.button,
-    variant === 'primary' ? styles.primaryButton : styles.secondaryButton,
-    disabled && styles.disabledButton
-  ];
+  const buttonStyle: ViewStyle = {
+    ...styles.button,
+    ...(variant === 'primary' ? styles.primaryButton : styles.secondaryButton),
+    ...(disabled ? styles.disabledButton : {})
+  };
 
-  const textStyle: TextStyle = [
-    styles.text,
-    variant === 'primary' ? styles.primaryText : styles.secondaryText,
-    disabled && styles.disabledText
-  ];
+  const textStyle: TextStyle = {
+    ...styles.text,
+    ...(variant === 'primary' ? styles.primaryText : styles.secondaryText),
+    ...(disabled ? styles.disabledText : {})
+  };
 
   return (
     <TouchableOpacity 
