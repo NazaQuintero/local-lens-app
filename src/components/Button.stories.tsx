@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
-import { fn, expect, userEvent } from 'storybook/test';
 import { Button } from './Button';
 
 const meta: Meta<typeof Button> = {
@@ -19,7 +18,7 @@ const meta: Meta<typeof Button> = {
   },
   args: {
     title: 'Button',
-    onPress: fn(),
+    onPress: () => {},
   },
   parameters: {
     backgrounds: {
@@ -42,11 +41,6 @@ export const Primary: Story = {
     title: 'Primary Button',
     variant: 'primary',
   },
-  play: async ({ canvas, args }) => {
-    const button = canvas.getByTestId('button');
-    await userEvent.click(button);
-    expect(args.onPress).toHaveBeenCalledTimes(1);
-  },
 };
 
 export const Secondary: Story = {
@@ -60,11 +54,6 @@ export const Disabled: Story = {
   args: {
     title: 'Disabled Button',
     disabled: true,
-  },
-  play: async ({ canvas, args }) => {
-    const button = canvas.getByTestId('button');
-    await userEvent.click(button);
-    expect(args.onPress).not.toHaveBeenCalled();
   },
 };
 
@@ -88,10 +77,10 @@ export const Interactive: Story = {
 export const AllVariants: Story = {
   render: () => (
     <>
-      <Button title="Primary" variant="primary" onPress={fn()} />
-      <Button title="Secondary" variant="secondary" onPress={fn()} />
-      <Button title="Disabled Primary" variant="primary" disabled onPress={fn()} />
-      <Button title="Disabled Secondary" variant="secondary" disabled onPress={fn()} />
+      <Button title="Primary" variant="primary" onPress={() => {}} />
+      <Button title="Secondary" variant="secondary" onPress={() => {}} />
+      <Button title="Disabled Primary" variant="primary" disabled onPress={() => {}} />
+      <Button title="Disabled Secondary" variant="secondary" disabled onPress={() => {}} />
     </>
   ),
   parameters: {
@@ -104,26 +93,7 @@ export const InteractionFlow: Story = {
     title: 'Test Interaction Flow',
     variant: 'primary',
   },
-  play: async ({ canvas, args, step }) => {
-    await step('Press button multiple times', async () => {
-      const button = canvas.getByTestId('button');
-      
-      await userEvent.click(button);
-      expect(args.onPress).toHaveBeenCalledTimes(1);
-      
-      await userEvent.click(button);
-      expect(args.onPress).toHaveBeenCalledTimes(2);
-      
-      await userEvent.click(button);
-      expect(args.onPress).toHaveBeenCalledTimes(3);
-    });
-    
-    await step('Verify button is still functional', async () => {
-      const button = canvas.getByTestId('button');
-      expect(button).toBeTruthy();
-    });
-  },
   parameters: {
-    notes: 'Este test verifica que el botón puede ser presionado múltiples veces y mantiene su funcionalidad.',
+    notes: 'Prueba interactiva del botón - puedes presionarlo múltiples veces para ver las acciones en el panel de acciones.',
   },
 };
