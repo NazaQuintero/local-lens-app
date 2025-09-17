@@ -10,7 +10,35 @@ Una aplicación móvil desarrollada con Expo React Native y Storybook.
 
 ## 📦 Instalación
 
+### Prerrequisitos
+
+- **Node.js v20.19.2** (recomendado usar nvm)
+- **nvm** (Node Version Manager)
+
+#### Instalar nvm
+
+Si no tienes nvm instalado, puedes instalarlo con:
+
 ```bash
+# macOS/Linux
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+
+# O usando Homebrew (macOS)
+brew install nvm
+```
+
+Después de instalar nvm, reinicia tu terminal o ejecuta:
+```bash
+source ~/.bashrc  # o ~/.zshrc según tu shell
+```
+
+### Instalar dependencias
+
+```bash
+# Usar la versión de Node.js especificada en .nvmrc
+nvm use
+
+# Instalar dependencias
 npm install
 ```
 
