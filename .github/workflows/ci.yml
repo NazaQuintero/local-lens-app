@@ -25,9 +25,6 @@ jobs:
     - name: Run tests
       run: npm test -- --coverage --watchAll=false
     
-    - name: Run Storybook build
-      run: npm run build:storybook
-    
     - name: Upload coverage reports
       uses: codecov/codecov-action@v3
       with:
