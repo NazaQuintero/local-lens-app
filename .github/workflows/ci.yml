@@ -34,15 +34,3 @@ jobs:
         file: ./coverage/lcov.info
         flags: unittests
         name: codecov-umbrella
-
-  docker-test:
-    runs-on: ubuntu-latest
-    
-    steps:
-    - uses: actions/checkout@v4
-    
-    - name: Build Docker image
-      run: docker build -t prueba-mobile-gestion .
-    
-    - name: Run tests in Docker
-      run: docker-compose run --rm test
