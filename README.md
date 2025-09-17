@@ -1,14 +1,12 @@
-# Prueba Mobile Gestión
+# Local Lens
 
-Una aplicación móvil desarrollada con Expo React Native, Storybook y testing completo.
+Una aplicación móvil desarrollada con Expo React Native y Storybook.
 
 ## 🚀 Características
 
 - **Expo React Native** con TypeScript
 - **Storybook** para desarrollo de componentes aislados
 - **Testing** con Jest y React Native Testing Library
-- **Docker** para desarrollo y CI/CD
-- **GitHub Actions** para integración continua
 
 ## 📦 Instalación
 
@@ -29,8 +27,6 @@ npm run android
 # Iniciar en iOS
 npm run ios
 
-# Iniciar en Web
-npm run web
 ```
 
 ### Storybook
@@ -54,27 +50,12 @@ npm run test:watch
 npm run test:coverage
 ```
 
-## 🐳 Docker
-
-### Desarrollo
-```bash
-# Iniciar la aplicación en Docker
-docker-compose up app
-
-# Ejecutar tests en Docker
-docker-compose run --rm test
-
-# Iniciar Storybook en Docker
-docker-compose up storybook
-```
-
 ## 📱 Uso de Storybook
 
 Para ver los componentes en Storybook:
 
-1. Cambia `SHOW_STORYBOOK = true` en `App.tsx`
-2. Ejecuta `npm run storybook`
-3. Abre la aplicación en tu dispositivo/emulador
+1. Ejecuta `npm run storybook`
+2. Abri la aplicación en tu dispositivo/emulador
 
 ## 🧪 Testing
 
@@ -103,43 +84,12 @@ src/
 └── ...
 
 .storybook/              # Configuración de Storybook
-.github/workflows/       # GitHub Actions
 ```
 
 ## 🔧 Configuración
-
-### Variables de Entorno
-Crea un archivo `.env` con:
-```
-EXPO_DEVTOOLS_LISTEN_ADDRESS=0.0.0.0
-```
 
 ### Jest
 La configuración de Jest está en `jest.config.js` y `jest.setup.js`.
 
 ### Storybook
 La configuración está en `.storybook/main.ts`.
-
-## 🚀 CI/CD
-
-El proyecto incluye GitHub Actions que:
-- Ejecutan tests en cada push/PR
-- Construyen Storybook
-- Ejecutan tests en Docker
-- Suben reportes de coverage
-
-## 📝 Desarrollo
-
-1. Crea componentes en `src/components/`
-2. Añade stories en `*.stories.tsx`
-3. Escribe tests en `__tests__/`
-4. Usa Storybook para desarrollo aislado
-5. Ejecuta tests antes de hacer commit
-
-## 🤝 Contribución
-
-1. Fork el proyecto
-2. Crea una rama para tu feature
-3. Commit tus cambios
-4. Push a la rama
-5. Abre un Pull Request
