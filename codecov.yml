@@ -1,0 +1,27 @@
+coverage:
+  status:
+    project:
+      default:
+        target: 70%          # 70% mínimo para main
+        threshold: 1%        # Tolerancia del 1%
+    patch:
+      default:
+        target: 70%          # 70% mínimo para PRs
+        threshold: 1%
+    changes:
+      default:
+        target: 70%          # 70% para cambios nuevos
+
+comment:
+  layout: "header,diff,files,footer"
+  behavior: default
+  require_changes: true      # Solo comentar si hay cambios
+  require_base: true         # Requerir base branch
+  require_head: true         # Requerir PR branch
+  message: "📊 Reporte de Cobertura de Código"
+
+github_checks:
+  annotations: true
+  notify:
+    default:
+      enabled: true

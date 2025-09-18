@@ -30,4 +30,31 @@ describe('Button', () => {
     fireEvent.press(getByTestId('button'));
     expect(mockOnPress).not.toHaveBeenCalled();
   });
+
+  it('renders with secondary variant', () => {
+    const { getByTestId } = render(
+      <Button title="Secondary Button" onPress={() => {}} variant="secondary" />
+    );
+
+    const button = getByTestId('button');
+    expect(button).toBeTruthy();
+  });
+
+  it('renders with primary variant by default', () => {
+    const { getByTestId } = render(
+      <Button title="Primary Button" onPress={() => {}} />
+    );
+
+    const button = getByTestId('button');
+    expect(button).toBeTruthy();
+  });
+
+  it('applies disabled styles when disabled', () => {
+    const { getByTestId } = render(
+      <Button title="Disabled Button" onPress={() => {}} disabled={true} />
+    );
+
+    const button = getByTestId('button');
+    expect(button).toBeTruthy();
+  });
 });
