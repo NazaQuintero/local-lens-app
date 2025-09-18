@@ -17,7 +17,7 @@ describe('Button', () => {
       <Button title="Test Button" onPress={mockOnPress} />
     );
     
-    // fireEvent.press(getByTestId('button'));
+    fireEvent.press(getByTestId('button'));
     expect(mockOnPress).toHaveBeenCalledTimes(1);
   });
 
