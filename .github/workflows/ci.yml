@@ -31,6 +31,33 @@ jobs:
         file: ./coverage/lcov.info
         flags: unittests
         name: codecov-umbrella
+        fail_ci_if_error: true          # FALLA si coverage no cumple
+    
+    - name: Comment PR with coverage
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+          try {
+            const coverage = JSON.parse(fs.readFileSync('coverage/coverage-summary.json', 'utf8'));
+            const total = coverage.total.lines.pct;
+            const meetsThreshold = total >= 70;
+            const color = meetsThreshold ? '🟢' : '🔴';
+            const status = meetsThreshold ? 'CUMPLE' : 'NO CUMPLE';
+            const message = meetsThreshold ? 
+              `✅ **Cobertura de código**: ${total}% de líneas cubiertas\n\n🎯 **Verificación de umbral**: ${status} (Requerido: 70%)\n\n📊 **Reporte detallado**: [Ver Cobertura](https://codecov.io/gh/${{ github.repository }}/commit/${{ github.sha }})` :
+              `❌ **Cobertura de código**: ${total}% de líneas cubiertas\n\n🚫 **Verificación de umbral**: ${status} (Requerido: 70%)\n\n⚠️ **Este PR no se puede mergear** hasta que la cobertura sea >= 70%\n\n📊 **Reporte detallado**: [Ver Cobertura](https://codecov.io/gh/${{ github.repository }}/commit/${{ github.sha }})`;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: message
+            });
+          } catch (error) {
+            console.log('Reporte de cobertura no encontrado, omitiendo comentario');
+          }
 
   notify-discord:
     needs: test
@@ -44,9 +71,10 @@ jobs:
         DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
       with:
         args: |
-          🚨 **CI Failed** 🚨
-          Repository: ${{ github.repository }}
-          Branch: ${{ github.ref_name }}
-          Commit: ${{ github.sha }}
-          Author: ${{ github.actor }}
-          [View Details](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+          🚨 **CI Falló** 🚨
+          **Repositorio**: ${{ github.repository }}
+          **Rama**: ${{ github.ref_name }}
+          **Commit**: ${{ github.sha }}
+          **Autor**: ${{ github.actor }}
+          **Motivo**: Falla en tests o cobertura de código < 70%
+          [Ver Detalles](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})

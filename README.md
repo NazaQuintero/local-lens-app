@@ -1,5 +1,8 @@
 # Local Lens
 
+[![codecov](https://codecov.io/gh/NazaQuintero/local-lens-app/branch/main/graph/badge.svg)](https://codecov.io/gh/NazaQuintero/local-lens-app)
+[![Build Status](https://github.com/NazaQuintero/local-lens-app/workflows/CI/badge.svg)](https://github.com/NazaQuintero/local-lens-app/actions)
+
 Una aplicación móvil desarrollada con Expo React Native y Storybook.
 
 ## 🚀 Características
