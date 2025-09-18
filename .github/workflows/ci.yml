@@ -31,3 +31,22 @@ jobs:
         file: ./coverage/lcov.info
         flags: unittests
         name: codecov-umbrella
+
+  notify-discord:
+    needs: test
+    runs-on: ubuntu-latest
+    if: failure()
+    
+    steps:
+    - name: Notify Discord on failure
+      uses: Ilshidur/action-discord@master
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      with:
+        args: |
+          🚨 **CI Failed** 🚨
+          Repository: ${{ github.repository }}
+          Branch: ${{ github.ref_name }}
+          Commit: ${{ github.sha }}
+          Author: ${{ github.actor }}
+          [View Details](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
