@@ -9,6 +9,7 @@ module.exports = {
     '!src/**/*.stories.{ts,tsx}',
     '!src/**/*.d.ts',
   ],
+  coverageReporters: ['text', 'lcov', 'json-summary'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
   testEnvironment: 'jsdom',
   transform: {
